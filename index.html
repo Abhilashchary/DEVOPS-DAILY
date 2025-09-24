@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>DevOps Daily</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{font-family:system-ui,Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#f6f7fb}
+    #card{max-width:700px;padding:24px;border-radius:12px;background:white;box-shadow:0 8px 30px rgba(0,0,0,.08);text-align:center}
+    button{margin-top:12px;padding:8px 14px;border-radius:8px;border:0;background:#2563eb;color:white;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div id="card">
+    <h1>DevOps Daily</h1>
+    <p id="quote">Loading quote…</p>
+    <button id="new">New Quote</button>
+  </div>
+
+  <script>
+    async function loadQuotes(){
+      const res = await fetch('quotes.txt');
+      const text = await res.text();
+      return text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+    }
+
+    function showRandom(quotes){
+      if(!quotes || quotes.length===0){ document.getElementById('quote').textContent = 'No quotes found.'; return; }
+      const q = quotes[Math.floor(Math.random()*quotes.length)];
+      document.getElementById('quote').textContent = q;
+    }
+
+    let quotes = [];
+    document.getElementById('new').addEventListener('click', ()=> showRandom(quotes));
+
+    loadQuotes().then(qs=>{
+      quotes = qs;
+      showRandom(quotes);
+    }).catch(err=>{
+      console.error(err);
+      document.getElementById('quote').textContent = 'Failed to load quotes.txt';
+    });
+  </script>
+</body>
+</html>
