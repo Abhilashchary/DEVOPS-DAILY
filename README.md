@@ -1,100 +1,140 @@
-📌 Project Name: DevOps Daily
-1. Project Overview
+DevOps Daily 🚀
 
-DevOps Daily is a simple, automated web application that displays a "daily quote" to users.
-The project’s main goal is to demonstrate a complete DevOps pipeline, from code changes to automated deployment.
+DevOps Daily is a simple, single-page web application that displays a daily inspirational quote. This project is designed to showcase a complete DevOps workflow using Docker, GitHub Actions, and Render for CI/CD.
 
-This project focuses on showcasing key DevOps concepts:
+Website: https://devops-daily.onrender.com
 
-Version Control with GitHub
+📌 Project Overview
 
-Containerization with Docker
+The goal of this project is to demonstrate a real-world DevOps pipeline. Every time a quote is updated in quotes.txt and pushed to GitHub, the pipeline automatically:
 
-Continuous Integration (CI) with GitHub Actions
+Builds a new Docker image.
 
-Continuous Deployment (CD) to a live environment
+Pushes the image to DockerHub.
 
-Automation of the software delivery lifecycle
+Deploys the updated app on Render.
 
-2. Tools Used
+This makes your app instantly updated with zero manual intervention.
 
-GitHub — for source code management and version control
+📁 Project Structure
+DEVOPS-DAILY/
+├── Dockerfile
+├── index.html
+├── quotes.txt
+├── .github/workflows/main.yml
+├── server.js
+└── README.md
 
-Docker — to containerize the application
 
-GitHub Actions — to create a CI/CD pipeline
+Dockerfile — Build instructions for Docker.
 
-Docker Hub — to store container images
+index.html — Main webpage displaying quotes.
 
-Play with Docker — to run the application online
+quotes.txt — List of daily quotes.
 
-VS Code — development environment
+main.yml — GitHub Actions pipeline for CI/CD.
 
-3. How It Works
+server.js — Node.js server (optional enhancement).
 
-Step-by-Step Flow:
+🛠 Requirements
 
-Code & Version Control
+GitHub account
 
-All project files (index.html, quotes.txt, Dockerfile) are stored in GitHub.
+Docker (optional for local development)
 
-Any change (e.g., updating quotes.txt) is committed and pushed to GitHub.
+Node.js & npm (optional for local development)
 
-CI Pipeline
+Render account
 
-GitHub Actions detects changes and runs a workflow (main.yml).
+DockerHub account
 
-The workflow builds a Docker image using the provided Dockerfile.
+🚀 Local Development
 
-The Docker image is pushed to Docker Hub.
+Clone the repository:
 
-CD Deployment
+git clone https://github.com/Abhilashchary/DEVOPS-DAILY.git
+cd DEVOPS-DAILY
 
-The latest image is pulled from Docker Hub and deployed to an online environment (Play with Docker).
 
-The application becomes instantly available online.
+Install dependencies (if using Node.js server):
 
-Observability
+npm install
 
-Logs and status are monitored in GitHub Actions.
 
-Deployment success can be verified via the live URL.
+Run the app locally:
 
-4. Project Structure
-devops-daily/
-│
-├── index.html       # Main page displaying the daily quote
-├── quotes.txt       # List of quotes (one per line)
-├── Dockerfile       # Instructions to containerize the app
-├── .github/
-│    └── workflows/
-│         └── main.yml  # CI/CD pipeline config
+npm start
 
-5. Live Project URL
 
-Click here to view DevOps Daily online
- 🌐
+Visit http://localhost:8080 to view.
 
-6. Demo
+🐳 Docker Setup
 
-📸 Screenshot of running project (replace with your screenshot):
+Build Docker image:
 
-7. Key Learning Outcomes
+docker build -t devops-daily .
 
-Understanding DevOps pipelines: How a change in code triggers build & deploy automatically.
 
-CI/CD expertise: Setting up GitHub Actions for automated workflows.
+Run container:
 
-Containerization: Packaging an app using Docker.
+docker run -p 8080:80 devops-daily
 
-Cloud deployment basics: Running a Docker container online without local setup.
 
-8. Future Improvements
+Visit http://localhost:8080.
 
-Add a database to store quotes.
+⚙ CI/CD Pipeline (GitHub Actions)
 
-Use a proper cloud service (AWS, DigitalOcean) for continuous deployment.
+The .github/workflows/main.yml file defines the pipeline:
 
-Add monitoring tools to track uptime and logs.
+Triggers: on push to main branch.
 
-Add an API to fetch quotes dynamically.
+Steps:
+
+Checkout code
+
+Setup QEMU and Docker Buildx
+
+Login to DockerHub
+
+Build and push Docker image
+
+Run tests
+
+Cleanup containers
+
+🌐 Deployment on Render
+
+Steps:
+
+Create a new web service.
+
+Choose Docker environment.
+
+Set environment variables:
+
+DOCKERHUB_USERNAME
+
+DOCKERHUB_TOKEN
+
+RENDER_API_KEY
+
+Set branch to main.
+
+Enable auto-deploy.
+
+Set build/start commands:
+
+docker build -t devops-daily .
+docker run -p 8080:80 devops-daily
+
+🔐 Secrets Management
+
+Render: Environment variables for sensitive data.
+
+GitHub: Repository Secrets for CI/CD.
+
+📄 License
+
+This project is licensed under the MIT License.
+
+Project Website: https://devops-daily.onrender.com
