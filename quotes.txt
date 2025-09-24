@@ -4,4 +4,4 @@ Fail fast, learn faster.
 Deploy small, deploy often.
 Make systems observable.
 Everytime you remember you have you .
-
+Remember you will die One Day.
